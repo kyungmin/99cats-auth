@@ -25,9 +25,5 @@ class CatRentalRequest < ActiveRecord::Base
     end
   end
 
-  # def overlapping_approved_requests
-  #   overlapping_requests && self.status == 'APPROVED'
-  # end
-
 
 end
