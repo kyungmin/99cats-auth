@@ -1,0 +1,37 @@
+<form action="<%= @cat.persisted? ? (cat_url(@cat.id)) : cats_url %>" method="post">
+	<% if @cat.persisted? %>
+		<input type="hidden" name="_method" value="put">
+	<% end %>
+
+	<label for="name">Cat Name</label>
+	<input type="text" name="cat[name]" id="name" value="<%= @cat.name %>">
+	<br>
+
+	<label for="age">Cat Age</label>
+	<input type="text" name="cat[age]" id="age" value="<%= @cat.age %>">
+	<br>
+
+	<label for="sex">Cat Sex</label>
+	<input type="radio" name="cat[sex]" id="sex" value="F" <%= "checked" if @cat.sex == "F" %>> Female
+	<input type="radio" name="cat[sex]" id="sex" value="M" <%= "checked" if @cat.sex == "M" %>> Male
+	<br>
+
+	<label for="color">Cat Color</label>
+	<select name="cat[color]" id="color">
+		<option value=""></option>
+		<option value="brown" <%= "selected" if @cat.color == "brown" %>>Brown</option>
+		<option value="black" <%= "selected" if @cat.color == "black" %>>Black</option>
+		<option value="blue" <%= "selected" if @cat.color == "blue" %>>Blue</option>
+	</select>
+	<br>
+
+	<label for="date">Cat Birth Date</label>
+	<input type="date" name="cat[birth_date]" id="date" value="<%= @cat.persisted? ? @cat.birth_date.strftime("%Y-%m-%d") : @cat.birth_date %>">
+	<br>
+
+	<% if @cat.persisted? %>
+	<input type="submit" value="Update cat">
+	<% else %>
+	<input type="submit" value="Create cat">
+	<% end %>
+</form>
