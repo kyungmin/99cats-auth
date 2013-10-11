@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   def reset_session_token!
     self.session_token = SecureRandom::urlsafe_base64(16)
+    self.save!
+#    self.update_attributes({:session_token => self.session_token})
   end
 
   def password=(password)
