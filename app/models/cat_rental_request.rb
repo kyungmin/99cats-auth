@@ -15,14 +15,47 @@ class CatRentalRequest < ActiveRecord::Base
   :foreign_key => :cat_id
   )
 
+  def approve!
+    self.status = "APPROVED"
+#    self.transaction do
+      self.update_attributes!({status: self.status})
+#    end
+    # self.cat.cat_rental_requests.each do |request|
+    #   if overlapping_pending_requests
+    #     deny!
+    #   end
+    # end
+  end
+
+  def deny!
+    self.status = "DENIED"
+    self.update_attributes!({status: self.status})
+  end
+
+  def pending?
+    self.status == "PENDING"
+  end
+
   private
-  def overlapping_approved_requests
+
+  def overlapping_requests
     CatRentalRequest.all.each do |request|
-      next if request.id == self.id
+      next if request.id == self.id || request.cat_id != self.cat_id
       if self.start_date.between?(request.start_date, request.end_date) ||               self.end_date.between?(request.start_date, request.end_date)
-        errors[:start_date] << "Date overlapping" if (self.status == 'APPROVED')
+        return true
       end
     end
+    false
+  end
+
+  def overlapping_approved_requests
+    if overlapping_requests && self.status == "APPROVED"
+      errors[:start_date] << "Date overlapping"
+    end
+  end
+
+  def overlapping_pending_requests
+    overlapping_requests && self.status == "PENDING"
   end
 
 

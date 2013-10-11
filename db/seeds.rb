@@ -9,4 +9,14 @@
 
 cat1 = Cat.create([{name: "Kiki", age: 2, birth_date: Date.parse("1988/09/21"), color: "blue", sex: "F"}])
 
-cat2 = Cat.create([{name: "KK", age: 3, birth_date: Date.parse("1988/09/21")), color: "black", sex: "F"}])
+cat2 = Cat.create([{name: "KK", age: 3, birth_date: Date.parse("1988/09/21"), color: "black", sex: "F"}])
+
+
+CatRentalRequest.create([{cat_id: 2, start_date: Date.parse("2013/09/21"), end_date: Date.parse("2013/10/21")}])
+
+#overlapping request
+# CatRentalRequest.create([{cat_id: 2, start_date: Date.parse("2013/09/30"), end_date: Date.parse("2013/10/21")}])
+
+CatRentalRequest.create([{cat_id: 2, start_date: Date.parse("2013/10/30"), end_date: Date.parse("2013/11/21")}])
+
+CatRentalRequest.create([{cat_id: 1, start_date: Date.parse("2013/10/30"), end_date: Date.parse("2013/11/21")}])

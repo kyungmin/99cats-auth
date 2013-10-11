@@ -18,7 +18,26 @@ class CatRentalRequestsController < ApplicationController
     @cat_rental_requests =  CatRentalRequest.all.sort_by! do |request|
                               request.start_date
                             end
+
     @cat_rental_request = CatRentalRequest.find(params[:id])
+    render :show
+  end
+
+  def approve
+    @cat_rental_requests =  CatRentalRequest.all.sort_by! do |request|
+                              request.start_date
+                            end
+    @cat_rental_request = CatRentalRequest.find(params[:id])
+    @cat_rental_request.approve!
+    render :show
+  end
+
+  def deny
+    @cat_rental_requests =  CatRentalRequest.all.sort_by! do |request|
+                              request.start_date
+                            end
+    @cat_rental_request = CatRentalRequest.find(params[:id])
+    @cat_rental_request.deny!
     render :show
   end
 end

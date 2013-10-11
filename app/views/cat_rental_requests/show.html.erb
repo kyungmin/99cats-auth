@@ -1,20 +1,26 @@
-<h1>My rental</h1>
+<h1>Request submitted</h1>
 <span>Cat name: <%= @cat_rental_request.cat.name %></span>
+<br />
+<span>Status: <%= @cat_rental_request.status %></span>
 <br />
 <span>Start date: <%= @cat_rental_request.start_date %></span>
 <br />
 <span>End date: <%= @cat_rental_request.end_date %></span>
 <br />
 <hr />
-<h1>Other rentals</h1>
+<h1>Previous rental requests</h1>
 <br />
 <% @cat_rental_requests.each do |request| %>
 <span>Cat name: <%= request.cat.name %></span>
 <br />
-
+<span>Status: <%= request.status %></span>
+<br />
 <span>Start date: <%= request.start_date %></span>
 <br />
 <span>End date: <%= request.end_date %></span>
+<br />
+<%= button_to "Approve", action: "approve" %>
+<%= button_to "Decline", action: "deny" %>
 <br />
 <br />
 <% end %>
