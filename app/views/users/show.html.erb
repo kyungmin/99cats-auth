@@ -1,4 +1,2 @@
 <h1>User</h1>
-<%= current_user unless @user.nil? %>
-<%= @user.session_token unless @user.nil? %>
-<%= @user.user_name %>
+<p>Hello <%= @user.user_name %><br><%= current_user.user_name %></p>

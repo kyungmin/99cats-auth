@@ -1,8 +1,18 @@
 <form action="<%= @cat.persisted? ? (cat_url(@cat.id)) : cats_url %>" method="post">
+
+
+
+  <input
+     name="authenticity_token"
+     type="hidden"
+     value="<%= form_authenticity_token %>">
+
+
+
 	<% if @cat.persisted? %>
 		<input type="hidden" name="_method" value="put">
 	<% end %>
-
+  <%= current_user.user_name %>
 	<label for="name">Cat Name</label>
 	<input type="text" name="cat[name]" id="name" value="<%= @cat.name %>">
 	<br>

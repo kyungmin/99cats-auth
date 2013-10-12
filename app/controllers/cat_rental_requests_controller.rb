@@ -15,20 +15,22 @@ class CatRentalRequestsController < ApplicationController
 
   end
   def show
-    @cat_rental_requests =  CatRentalRequest.all.sort_by! do |request|
+    @cat_rental_request = CatRentalRequest.find(params[:id])
+    @cat_rental_requests =  CatRentalRequest.where({:cat_id => @cat_rental_request.cat_id}).sort_by! do |request|
                               request.start_date
                             end
 
-    @cat_rental_request = CatRentalRequest.find(params[:id])
     render :show
   end
 
   def approve
-    @cat_rental_requests =  CatRentalRequest.all.sort_by! do |request|
-                              request.start_date
-                            end
     @cat_rental_request = CatRentalRequest.find(params[:id])
     @cat_rental_request.approve!
+    @cat_rental_requests =  CatRentalRequest.where({:cat_id => @cat_rental_request.cat_id}).sort_by! do |request|
+                              request.start_date
+                            end
+
+#    redirect_to cat_cat_rental_request_url(@cat_rental_request)
     render :show
   end
 
@@ -38,6 +40,9 @@ class CatRentalRequestsController < ApplicationController
                             end
     @cat_rental_request = CatRentalRequest.find(params[:id])
     @cat_rental_request.deny!
-    render :show
+    redirect_to cat_cat_rental_request_url(@cat_rental_request)
   end
 end
+
+
+

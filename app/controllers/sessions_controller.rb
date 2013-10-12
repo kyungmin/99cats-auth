@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
                                      params[:user][:password])
 
     @user.reset_session_token!
-    session[:session_token] = @user.session_token
+    login_user!
 
     if @user.nil?
       redirect_to users_url

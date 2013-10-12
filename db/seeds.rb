@@ -7,9 +7,9 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Cat.create([{name: "Kiki", age: 2, birth_date: Date.parse("1988/09/21"), color: "blue", sex: "F"}])
+Cat.create([{name: "vincent_cat", age: 2, birth_date: Date.parse("1988/09/21"), color: "blue", sex: "F", user_id: 1}])
 
-Cat.create([{name: "kitty", age: 3, birth_date: Date.parse("1988/09/21"), color: "black", sex: "F"}])
+Cat.create([{name: "kk_cat", age: 3, birth_date: Date.parse("1988/09/21"), color: "black", sex: "F", user_id: 2}])
 
 
 CatRentalRequest.create([{cat_id: 2, start_date: Date.parse("2013/09/21"), end_date: Date.parse("2013/10/21")}])
@@ -23,4 +23,4 @@ CatRentalRequest.create([{cat_id: 1, start_date: Date.parse("2013/10/30"), end_d
 
 
 User.create([{user_name: "vincent", password: "kiki"}])
-User.create([{user_name: "kyungminkk", password: "Kiki"}])
+User.create([{user_name: "kyungminkk", password: "kiki"}])

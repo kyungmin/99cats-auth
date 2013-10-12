@@ -7,7 +7,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      render :show
+#      render :show
+
+      login_user!
+      redirect_to cats_url
     else
       render :new
     end

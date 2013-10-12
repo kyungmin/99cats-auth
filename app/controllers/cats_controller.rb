@@ -1,4 +1,5 @@
 class CatsController < ApplicationController
+  before_filter :require_owner, only: [:edit, :update]
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +17,10 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(params[:cat])
+    @cat.user_id = current_user.id
+
+    # @cat = current_user.cats.build(params[:cat])
+
     if @cat.save
       render :show
     else
@@ -34,6 +39,16 @@ class CatsController < ApplicationController
       render :show
     else
       render :edit
+    end
+  end
+
+  private
+
+  def require_owner
+    @cat = Cat.find(params[:id])
+    unless @cat.user_id == current_user.id
+      flash[:error] = ["You must be the owner of the cat."]
+      redirect_to cat_url(@cat)
     end
   end
 end

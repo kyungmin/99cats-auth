@@ -1,4 +1,8 @@
+<%= @cat_rental_request.cat.user_id %>
+<%= current_user.id %>
 <h1>Request submitted</h1>
+<span>Request ID: <%= @cat_rental_request.id %></span>
+<br />
 <span>Cat name: <%= @cat_rental_request.cat.name %></span>
 <br />
 <span>Status: <%= @cat_rental_request.status %></span>
@@ -8,9 +12,12 @@
 <span>End date: <%= @cat_rental_request.end_date %></span>
 <br />
 <hr />
-<h1>Previous rental requests</h1>
+<h1>Pending rental requests</h1>
 <br />
 <% @cat_rental_requests.each do |request| %>
+<% next if request.status != 'PENDING' %>
+<span>Request ID: <%= @cat_rental_request.id %></span>
+<br />
 <span>Cat name: <%= request.cat.name %></span>
 <br />
 <span>Status: <%= request.status %></span>
@@ -19,8 +26,10 @@
 <br />
 <span>End date: <%= request.end_date %></span>
 <br />
+<% if @cat_rental_request.cat.user_id == current_user.id %>
 <%= button_to "Approve", action: "approve" %>
 <%= button_to "Decline", action: "deny" %>
+<% end %>
 <br />
 <br />
 <% end %>

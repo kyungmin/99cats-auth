@@ -19,6 +19,7 @@ class CatRentalRequest < ActiveRecord::Base
     self.status = "APPROVED"
 #    self.transaction do
       self.update_attributes!({status: self.status})
+#      self.save!
 #    end
     # self.cat.cat_rental_requests.each do |request|
     #   if overlapping_pending_requests
@@ -41,7 +42,7 @@ class CatRentalRequest < ActiveRecord::Base
   def overlapping_requests
     CatRentalRequest.all.each do |request|
       next if request.id == self.id || request.cat_id != self.cat_id
-      if self.start_date.between?(request.start_date, request.end_date) ||               self.end_date.between?(request.start_date, request.end_date)
+      if self.start_date.between?(request.start_date, request.end_date) || self.end_date.between?(request.start_date, request.end_date)
         return true
       end
     end

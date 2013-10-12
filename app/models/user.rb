@@ -8,8 +8,15 @@ class User < ActiveRecord::Base
   validates :user_name, :password_digest, :session_token, :presence => true
   validates :user_name, :uniqueness => true
 
+  has_many(
+  :cats,
+  :class_name => "Cat",
+  :foreign_key => :user_id,
+  :primary_key => :id
+  )
+
   before_validation(on: :create) do
-    reset_session_token!
+    self.session_token = SecureRandom::urlsafe_base64(16)
   end
 
 
